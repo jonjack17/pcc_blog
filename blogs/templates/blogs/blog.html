@@ -15,6 +15,7 @@
       <li>
         <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
         <p>{{ post.text|linebreaks }}</p>
+        <p><a href="{% url 'blogs:edit_post' post.id %}">Edit post</a></p>
       </li>
     {% empty %}
       <li>No posts have been made yet.</li>
