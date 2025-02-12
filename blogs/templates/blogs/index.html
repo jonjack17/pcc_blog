@@ -11,8 +11,12 @@
             in each Blog to log your journey, and share it so that others can 
             learn from it as well!</p>
 
-            <a class="btn btn-primary btn-lg mt-1"
-              href="{% url 'accounts:register' %}">Register &raquo;</a>
+            {% if user.is_authenticated %}
+                <h4>Welcome back, {{ user.username }}</h4>
+            {% else %}
+                <a class="btn btn-primary btn-lg mt-1"
+                href="{% url 'accounts:register' %}">Register &raquo;</a>
+            {% endif %}
         </div>
     </div>
 {% endblock page_header %}
