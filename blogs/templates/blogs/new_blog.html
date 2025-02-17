@@ -10,7 +10,12 @@
      private, when creating new blog. Add a selector option in
      the form - "Blogs are private by default. Check box to make 
      this blog public." Need to adjust Blog model and view, migrate,
-    and adjust visibility of content to match this new feature. -->
+    and adjust visibility of content to match this new feature.
+  
+  
+  1. Update view to add public/private attribute. Done.
+  2. Update form to include selecting this attribute. Done. 
+  3. Adjust visibility of public content.-->
 {% block content %}
 
   <form action="{% url 'blogs:new_blog' %}" method='post'>

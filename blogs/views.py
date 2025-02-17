@@ -9,15 +9,29 @@ def index(request):
     """The home page for Blog."""
     return render(request, 'blogs/index.html')
 
+
 def blogs(request):
-    """Page that lists all blogs."""
-    blogs = Blog.objects.order_by('date_added')
-    context = {'blogs':blogs}
+    """Page that lists all blogs for the current user, and public blogs."""
+    if request.user.is_authenticated:
+        blogs = Blog.objects.filter(owner=request.user).order_by('date_added')
+        public_blogs = Blog.objects.filter(public = True).order_by('date_added')
+        context = {'blogs':blogs, 'public_blogs':public_blogs}
+    else:
+        blogs = None
+        public_blogs = Blog.objects.filter(public = True).order_by('date_added')
+        context = {'blogs':blogs, 'public_blogs':public_blogs}
+
     return render(request, 'blogs/blogs.html', context)
+
 
 def blog(request, blog_id):
     """Page that lists a specific blog and its posts."""
     blog = Blog.objects.get(id=blog_id)
+    if not request.user.is_authenticated and blog.public == False:
+        return redirect('accounts:login')
+    if blog.owner != request.user and blog.public == False:
+        raise Http404
+    
     posts = blog.post_set.order_by('-date_added')
     context = {'blog':blog, 'posts':posts}
     return render(request, 'blogs/blog.html', context)
