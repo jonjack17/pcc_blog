@@ -13,6 +13,8 @@
 
             {% if user.is_authenticated %}
                 <h4>Welcome back, {{ user.username }}</h4>
+                <a class="btn btn-primary btn-lg mt-3" 
+                    href="{% url 'blogs:blogs' %}">Your Blogs</a>
             {% else %}
                 <a class="btn btn-primary btn-lg mt-1"
                 href="{% url 'accounts:register' %}">Register &raquo;</a>

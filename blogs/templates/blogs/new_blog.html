@@ -5,6 +5,12 @@
   <h2>Add a new blog:</h2>
 {% endblock page_header %}
 
+
+<!-- Addition - add option for user to mark blog as public or 
+     private, when creating new blog. Add a selector option in
+     the form - "Blogs are private by default. Check box to make 
+     this blog public." Need to adjust Blog model and view, migrate,
+    and adjust visibility of content to match this new feature. -->
 {% block content %}
 
   <form action="{% url 'blogs:new_blog' %}" method='post'>
