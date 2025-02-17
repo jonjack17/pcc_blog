@@ -12,8 +12,14 @@
         <a href="{% url 'blogs:blog' blog.id %}">{{ blog.text }}</a>
       </li>
     {% empty %}
-      <li class="list-group-item border-0">You have not added any blogs yet.
-      </li>
+      {% if user.is_authenticated %}
+        <li class="list-group-item border-0">You have not added any blogs yet.
+        </li>
+      {% else %}
+        <li class="list-group-item border-0">Please register or login to 
+          add blogs.
+        </li>
+      {% endif %}
     {% endfor %}
   </ul>
 
